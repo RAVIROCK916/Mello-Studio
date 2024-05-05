@@ -1,0 +1,16 @@
+{
+  "name": "mello-studio",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "client": "cd client && bun dev",
+    "server": "bun run server/index.ts",
+    "dev": "bun --watch server/index.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 import Home from "./pages/home/Home";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
+import Dashboard from "./pages/dashboard/Dashboard";
 import { SignedIn, SignedOut } from "@clerk/clerk-react";
 
 function App() {
@@ -14,11 +15,12 @@ function App() {
 				<main className="flex justify-center my-4">
 					<SignedIn>
 						<Routes>
-							<Route path="/" element={<Home />} />
+							<Route path="/dashboard" element={<Dashboard />} />
 						</Routes>
 					</SignedIn>
 					<SignedOut>
 						<Routes>
+							<Route path="/" element={<Home />} />
 							<Route path="/login" element={<Login />} />
 							<Route path="/sign-up" element={<Signup />} />
 						</Routes>

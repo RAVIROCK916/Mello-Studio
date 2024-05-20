@@ -12,13 +12,13 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="">
-        <ul className="space-y-3 text-sm font-bold">
+      <nav className="relative ml-px">
+        <ul className="relative -left-12 space-y-3 text-sm font-bold">
           {navItems.map((navItem, index) => {
             return (
               <li
                 className={
-                  `flex cursor-pointer items-center gap-2 border-l-2 border-transparent px-12 py-4 text-black-variant-2 hover:text-black-variant-2/80 ` +
+                  `flex cursor-pointer items-center gap-2 border-l-4 border-transparent px-12 py-4 text-black-variant-2 hover:text-black-variant-2/80 ` +
                   (activeNavItem === navItem.value
                     ? "!border-secondary-1 bg-gradient-to-r from-secondary-1/5 to-secondary-2/10 text-secondary-1 hover:text-secondary-1/80"
                     : "")
@@ -31,7 +31,7 @@ const Navbar = () => {
                 >
                   {navItem.icon}
                 </span>
-                {navItem.value}
+                <span className="w-fit">{navItem.value}</span>
               </li>
             );
           })}

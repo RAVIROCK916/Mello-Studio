@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { fetchAPI } from "../utils/fetchAPI";
+import { fetchAPI } from "../utils/fetchData";
 
 type Album = {
   id: number;

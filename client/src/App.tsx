@@ -10,12 +10,12 @@ import { SignedIn, SignedOut } from "@clerk/clerk-react";
 function App() {
 	return (
 		<Router>
-			<div className="">
+			<div className="px-12 py-8">
 				<Header />
-				<main className="flex justify-center my-4">
+				<main className="flex my-4">
 					<SignedIn>
 						<Routes>
-							<Route path="/dashboard" element={<Dashboard />} />
+							<Route path="/" element={<Dashboard />} />
 						</Routes>
 					</SignedIn>
 					<SignedOut>

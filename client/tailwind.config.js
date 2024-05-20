@@ -11,7 +11,11 @@ export default {
 				secondary: {
 					1: "#E21376",
 					2: "#FFDFEE",
-				},
+        },
+        tertiary: {
+					1: "#0C3139",
+					2: "#FFDFEE",
+        },
 				"black-variant": {
 					1: "#000000",
 					2: "#262626",

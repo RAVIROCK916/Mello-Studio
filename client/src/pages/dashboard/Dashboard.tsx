@@ -1,25 +1,21 @@
 import { useEffect } from "react";
 import Navbar from "../../components/Navbar";
-import { useAlbumStore } from "../../store/album-store";
 import Highlights from "../../components/Highlights";
+import Songs from "../../components/Songs";
 
 const Dashboard = () => {
 
-  const albumsData = useAlbumStore((state) => state.fetchAlbums);
-  const fetchAlbums = async () => {
-    const data = await albumsData();
-    console.log(data)
-  }
-
   useEffect(() => {
-    fetchAlbums()
-  })
-  
-	return (
-		<div className="w-full flex">
+  });
+
+  return (
+    <div className="flex max-w-full">
       <Navbar />
-      <Highlights />
-		</div>
-	);
+      <div className="overflow-hidden">
+        <Highlights />
+        {/* <Songs /> */}
+      </div>
+    </div>
+  );
 };
 export default Dashboard;

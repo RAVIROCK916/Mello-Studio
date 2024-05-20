@@ -1,8 +1,14 @@
-import express from "express"
-import { getAlbums } from "../controllers/albumController";
+import { Router } from "express";
+import {
+	getAlbum,
+	getAlbums,
+	getNewReleases,
+} from "../controllers/albumController";
 
-const router = express.Router();
+const router = Router();
 
-router.route("/").get(getAlbums)
+router.route("/").get(getAlbums);
+router.route("/new-releases").get(getNewReleases);
+router.route("/:id").get(getAlbum);
 
 export default router;

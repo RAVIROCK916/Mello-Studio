@@ -1,39 +1,73 @@
 import axios from "axios";
-import type { NextFunction, Request, Response } from "express";
+import type { Response } from "express";
+import { ALBUM_URL, NEW_ALBUM_RELEASES_URL } from "../constants/api-urls";
+import type { AuthenticatedRequest } from "../types/requests";
 
-const { X_RapidAPI_Key, X_RapidAPI_Host } = import.meta.env;
 
-export const getAlbums = async (
-	req: Request,
-	res: Response,
-	next: NextFunction
+export const getAlbums = async (req: AuthenticatedRequest, res: Response) => {
+	const { token } = req;
+
+	axios
+		.get(ALBUM_URL, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		})
+		.then((response) => {
+			res.json(response.data.albums.items);
+		})
+		.catch((error) => {
+			console.error(error.message);
+			res
+				.status(500)
+				.json({ error: "An error occurred while fetching the albums!!!" });
+		});
+};
+
+export const getNewReleases = async (
+	req: AuthenticatedRequest,
+	res: Response
 ) => {
-  console.log("Get");
-  
-	const options = {
-		method: "GET",
-		url: "https://spotify23.p.rapidapi.com/search/",
-		params: {
-			q: "<REQUIRED>",
-			type: "multi",
-			offset: "0",
-			limit: "10",
-			numberOfTopResults: "5",
-		},
-		headers: {
-			"X-RapidAPI-Key":
-				X_RapidAPI_Key || "5c1f0caa36msha37e443dff4fe3cp101b2djsnf7e9a75b7f45",
-			"X-RapidAPI-Host": X_RapidAPI_Host || "spotify23.p.rapidapi.com",
-		},
-	};
+	const { token } = req;
+
+	axios
+		.get(NEW_ALBUM_RELEASES_URL, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+      },
+      params: {
+        limit: 5,
+      }
+		})
+		.then((response) => {
+			res.json(response.data.albums.items);
+		})
+		.catch((error) => {
+			console.error(error.message);
+			res
+				.status(500)
+				.json({ error: "An error occurred while fetching the albums!!!" });
+		});
+};
+
+export const getAlbum = async (req: AuthenticatedRequest, res: Response) => {
+	const {
+		token,
+		params: { id },
+	} = req;
 
 	try {
-		const response = await axios.request(options);
-		const data = await response.data;
-		// console.log("data", data);
-		return "data";
-	} catch (error) {
-		console.error(error);
+		const response = await axios.get(`${ALBUM_URL}/${id}`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
+		console.log(response.data);
+		res.json(response.data);
+	} catch (error: any) {
+		console.error(error.message);
+		res
+			.status(500)
+			.json({ error: "An error occurred while fetching the album!!!" });
 	}
-	res.send("Hello World!");
 };

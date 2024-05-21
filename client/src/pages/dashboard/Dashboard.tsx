@@ -1,19 +1,15 @@
-import { useEffect } from "react";
 import Navbar from "../../components/Navbar";
 import Highlights from "../../components/Highlights";
-import Songs from "../../components/Songs";
+import SongsCards from "../../components/SongsCards";
 
 const Dashboard = () => {
-
-  useEffect(() => {
-  });
 
   return (
     <div className="flex max-w-full">
       <Navbar />
-      <div className="overflow-hidden">
+      <div className="overflow-hidden flex flex-col w-5/6 gap-8">
         <Highlights />
-        {/* <Songs /> */}
+        <SongsCards title="Genres" type="genre" />
       </div>
     </div>
   );

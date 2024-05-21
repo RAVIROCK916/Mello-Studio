@@ -11,7 +11,6 @@ const HighlightAlbumCard = ({ album }: PropsType) => {
   const artists: ArtistType[] = useFetchData(
     "/api/artists?ids=" + artistIds.join(","),
   );
-  console.log("artists", artists);
 
   return (
     <div className="flex h-64 min-w-full max-w-full flex-1 overflow-hidden rounded-md bg-tertiary-1 text-white">
@@ -40,6 +39,7 @@ const HighlightAlbumCard = ({ album }: PropsType) => {
         {artists.length > 0 &&
           artists.map((artist) => (
             <img
+              key={artist.id}
               src={artist.images[0].url}
               className="object-cover grayscale"
               alt=""

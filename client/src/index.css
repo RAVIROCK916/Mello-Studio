@@ -8,7 +8,7 @@
   * {
     box-sizing: border-box;
   }
-  
+
   body {
     font-family: "Hellix", "JetBrains Mono", monospace;
   }
@@ -19,11 +19,14 @@
 }
 
 @layer utilities {
-  .highlight-card {
+  .horizontal-scroll {
+    overflow: scroll;
+  }
+  .horizontal-scroll::-webkit-scrollbar {
+    display: none;
+  }
+  .horizontal-scroll {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
-  }
-  .highlight-card::-webkit-scrollbar {
-    display: none;
   }
 }

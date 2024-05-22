@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { AlbumType } from "../types";
 
 type Props = {
-  album: {
+  item: {
     genre: string;
     tracks: {
       album: AlbumType;
@@ -10,17 +10,17 @@ type Props = {
   };
 };
 
-const GenreCard = ({ album }: Props) => {
+const GenreCard = ({ item }: Props) => {
   return (
     <Link to="/dashboard/genres">
       <div
         className="relative size-48 overflow-hidden rounded-md bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url(${album.tracks[0].album.images[0].url})`,
+          backgroundImage: `url(${item.tracks[0].album.images[0].url})`,
         }}
       >
         <h1 className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-20 px-4 py-2 text-3xl font-bold text-white transition-colors duration-[3000] hover:bg-opacity-40">
-          {album.genre}
+          {item.genre}
         </h1>
       </div>
     </Link>

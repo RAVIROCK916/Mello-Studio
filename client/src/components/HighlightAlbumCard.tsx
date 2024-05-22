@@ -1,5 +1,5 @@
 import useFetchData from "../hooks/useFetchData";
-import {AlbumType, ArtistType} from "../types/index";
+import { AlbumType, ArtistType } from "../types/index";
 
 type PropsType = {
   album: AlbumType;
@@ -24,7 +24,7 @@ const HighlightAlbumCard = ({ album }: PropsType) => {
             <p className="text-xl font-semibold">{album.artists[0].name}</p>
           </div>
           <div>
-            <button className="rounded-full bg-gradient-to-br from-primary-1 to-primary-2 px-8 py-2.5 text-xs font-semibold">
+            <button className="rounded-full bg-gradient-to-br from-primary-1 to-primary-2 px-8 py-2.5 text-xs font-semibold transition-colors duration-[3000] ease-in-out hover:bg-gradient-to-bl">
               Listen Now
             </button>
           </div>

@@ -1,4 +1,5 @@
 import useFetchData from "../hooks/useFetchData";
+import ArtistCard from "./ArtistCard";
 import GenreCard from "./GenreCard";
 
 type PropsType = {
@@ -7,25 +8,29 @@ type PropsType = {
 };
 
 const SongsCards = ({ title, type }: PropsType) => {
-  let albums, SongCard;
+  let data, Card;
   switch (type) {
     case "genre":
-      SongCard = GenreCard;
-      albums = useFetchData("/api/albums/genres");
+      Card = GenreCard;
+      data = useFetchData("/api/albums/genres");
+      break;
+    case "artist":
+      Card = ArtistCard;
+      data = useFetchData("/api/artists/top");
       break;
     default:
-      SongCard = GenreCard;
-      albums = useFetchData("/api/albums/genres");
+      Card = GenreCard;
+      data = useFetchData("/api/albums/genres");
       break;
   }
-  console.log("albums", albums);
+  console.log(type, data);
 
   return (
     <div className="flex flex-col gap-2">
       <h1 className="text-2xl font-bold">{title}</h1>
       <div className="horizontal-scroll flex gap-8">
-        {albums.map((album, i) => (
-          <SongCard album={album} key={i + 1} />
+        {data.map((item, i) => (
+          <Card item={item} key={i + 1} />
         ))}
       </div>
     </div>

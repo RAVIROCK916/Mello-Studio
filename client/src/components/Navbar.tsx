@@ -1,13 +1,18 @@
 import { useState } from "react";
-import { FaRegSquareFull, FaSquareFull } from "react-icons/fa6";
-import { HiOutlineMusicNote } from "react-icons/hi";
+import {
+  faBookOpen,
+  faMusic,
+  faSquareFull,
+  faVolumeLow,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 const Navbar = () => {
   const navItems = [
-    { value: "Home", icon: HiOutlineMusicNote },
-    { value: "Genre", icon: HiOutlineMusicNote },
-    { value: "My Library", icon: HiOutlineMusicNote },
+    { value: "Home", icon: faMusic },
+    { value: "Genre", icon: faVolumeLow },
+    { value: "My Library", icon: faBookOpen },
   ];
 
   const [activeNavItem, setActiveNavItem] = useState("Home");
@@ -17,7 +22,7 @@ const Navbar = () => {
       <nav className="relative ml-px w-1/6">
         <ul className="relative -left-12 space-y-3 text-sm font-bold">
           {navItems.map((navItem, index) => {
-            let Icon = navItem.icon;
+            let Icon = navItem.icon as IconProp;
             return (
               <li
                 className={
@@ -29,19 +34,15 @@ const Navbar = () => {
                 onClick={() => setActiveNavItem(navItem.value)}
                 key={index + 1}
               >
-                {/* <span>
-                  <Icon className="bg-gradient-to-r from-pink-500 to-violet-500 text-lg text-white" />
-                </span> */}
-                <div className="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-2xl text-transparent">
-                  <Icon
-                    className="bg-gradient-to-r from-blue-400 to-purple-600 text-white"
-                    mask={`url(${FaSquareFull})`}
+                {activeNavItem === navItem.value ? (
+                  <FontAwesomeIcon
+                    className="bg-gradient-to-b from-primary-1 from-50% via-primary-2 via-50% to-primary-2 text-base text-white"
+                    icon={Icon}
+                    mask={faSquareFull}
                   />
-                  {/* <FontAwesomeIcon
-                    icon="'House'"
-                    mask={`${FaSquareFull}`}
-                  /> */}
-                </div>
+                ) : (
+                  <FontAwesomeIcon className="text-base" icon={Icon} />
+                )}
                 <span>{navItem.value}</span>
               </li>
             );

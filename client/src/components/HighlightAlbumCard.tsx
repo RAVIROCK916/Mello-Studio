@@ -1,5 +1,6 @@
-import useFetchData from "../hooks/useFetchData";
+import { useQuery } from "@tanstack/react-query";
 import { AlbumType, ArtistType } from "../types/index";
+import axios from "axios";
 
 type PropsType = {
   album: AlbumType;
@@ -7,10 +8,14 @@ type PropsType = {
 
 const HighlightAlbumCard = ({ album }: PropsType) => {
   const artistIds = album.artists.map((artist) => artist.id);
+  const fetchArtistsURL = "/api/artists?ids=" + artistIds.join(",");
 
-  const artists: ArtistType[] = useFetchData(
-    "/api/artists?ids=" + artistIds.join(","),
-  );
+  const { data } = useQuery({
+    queryKey: ["get-artists", artistIds],
+    queryFn: () => axios.get(fetchArtistsURL),
+  });
+
+  const artists = data?.data;
 
   return (
     <div className="flex h-64 min-w-full max-w-full flex-1 overflow-hidden rounded-md bg-tertiary-1 text-white">
@@ -36,13 +41,13 @@ const HighlightAlbumCard = ({ album }: PropsType) => {
           className="object-cover grayscale"
           alt={album.name}
         />
-        {artists.length > 0 &&
-          artists.map((artist) => (
+        {artists?.length > 0 &&
+          artists.map((artist: ArtistType) => (
             <img
               key={artist.id}
               src={artist.images[0].url}
               className="object-cover grayscale"
-              alt=""
+              alt="artist"
             />
           ))}
       </div>

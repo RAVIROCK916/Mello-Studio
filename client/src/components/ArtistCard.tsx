@@ -1,5 +1,6 @@
 import { AlbumType } from "../types";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 type Props = {
   item: {
@@ -18,19 +19,54 @@ type Props = {
   };
 };
 
+const cardVariants = {
+  initial: {
+    opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+    transition: {
+      duration: 0.2,
+      type: "tween",
+    },
+  },
+};
+
+const titleVariants = {
+  initial: {},
+  animate: {
+    x: 5,
+    y: -35,
+    originX: 0,
+    scale: 1.25,
+    color: "white",
+    transition: {
+      duration: 0.2,
+      type: "tween",
+    },
+  },
+};
+
 const ArtistCard = ({ item }: Props) => {
   return (
-    <div className="flex flex-col gap-2">
+    <motion.div
+      className="flex flex-col gap-2"
+      initial="initial"
+      animate="initial"
+      whileHover="animate"
+    >
       <Link to="/dashboard/genres">
         <div
           className="size-48 overflow-hidden rounded-md bg-cover bg-center bg-no-repeat brightness-90 transition duration-[3000] hover:brightness-75"
           style={{
-            backgroundImage: `url(${item.images[1].url})`,
+            backgroundImage: `url(${item.images[0].url})`,
           }}
         ></div>
       </Link>
-      <h1 className="font-bold">{item.name}</h1>
-    </div>
+      <motion.h1 className="font-bold" variants={titleVariants}>
+        {item.name}
+      </motion.h1>
+    </motion.div>
   );
 };
 export default ArtistCard;

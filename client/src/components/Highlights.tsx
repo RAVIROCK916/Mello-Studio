@@ -18,19 +18,19 @@ const Highlights = () => {
   return (
     <div className="relative">
       <div className="horizontal-scroll overflow-scroll">
-        <div className="flex gap-4 ">
+        <div className="flex gap-4 snap-x">
           {albums.length > 0 &&
             albums.map((album: AlbumType) => (
               <HighlightAlbumCard album={album} key={album.id} />
             ))}
-          <div className="absolute -right-6 bottom-full top-0 flex rotate-90">
+          {/* <div className="absolute -right-6 bottom-full top-0 flex rotate-90">
             {albums.map((_: AlbumType, i: number) => (
               <span
                 key={i + 1}
                 className="h-2 w-2 rounded-full bg-tertiary-1"
               ></span>
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { AlbumType, ArtistType } from "../types/index";
 import axios from "axios";
+import { motion } from "framer-motion";
 
 type PropsType = {
   album: AlbumType;
@@ -18,7 +19,7 @@ const HighlightAlbumCard = ({ album }: PropsType) => {
   const artists = data?.data;
 
   return (
-    <div className="flex h-64 min-w-full max-w-full flex-1 overflow-hidden rounded-md bg-tertiary-1 text-white">
+    <div className="flex h-64 min-w-full max-w-full flex-1 snap-center overflow-hidden rounded-md bg-tertiary-1 text-white">
       <div className="flex-1">
         <div className="flex h-full flex-col justify-between px-10 py-6">
           <span className="text-sm font-medium text-neutral-300/70">
@@ -29,9 +30,18 @@ const HighlightAlbumCard = ({ album }: PropsType) => {
             <p className="text-xl font-semibold">{album.artists[0].name}</p>
           </div>
           <div>
-            <button className="rounded-full bg-gradient-to-br from-primary-1 to-primary-2 px-8 py-2.5 text-xs font-semibold transition-colors duration-[3000] ease-in-out hover:bg-gradient-to-bl">
+            <motion.button
+              className="rounded-full bg-gradient-to-br from-primary-1 to-primary-2 px-8 py-2.5 text-xs font-semibold transition-colors duration-[3000] ease-in-out hover:bg-gradient-to-bl"
+              whileHover={{
+                backgroundImage:
+                  "linear-gradient(to bottom right, #45BED5, #E21376)",
+              }}
+              transition={{
+                duration: 0.2,
+              }}
+            >
               Listen Now
-            </button>
+            </motion.button>
           </div>
         </div>
       </div>

@@ -36,7 +36,7 @@ const Navbar = () => {
               >
                 {activeNavItem === navItem.value ? (
                   <FontAwesomeIcon
-                    className="bg-gradient-to-b from-primary-1 from-50% via-primary-2 via-50% to-primary-2 text-base text-white"
+                    className="bg-gradient-to-r from-primary-1 from-50% via-primary-2 via-50% to-primary-2 text-base text-white"
                     icon={Icon}
                     mask={faSquareFull}
                   />

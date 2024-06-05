@@ -40,27 +40,26 @@ const Header = () => {
           </div>
         </div>
       );
+    } else {
+      return (
+        <ul className="flex flex-1 flex-row-reverse gap-8 text-sm tracking-wide text-black-variant-2">
+          <li className={listItemStyle}>
+            <MdPerson />
+            <Link to="/login">Login</Link>
+          </li>
+          <li className={listItemStyle}>
+            <MdLogin />
+            <Link to="/sign-up">Sign Up</Link>
+          </li>
+        </ul>
+      );
     }
-    return (
-      <>
-        <li className={listItemStyle}>
-          <MdPerson />
-          <Link to="/login">Login</Link>
-        </li>
-        <li className={listItemStyle}>
-          <MdLogin />
-          <Link to="/sign-up">Sign Up</Link>
-        </li>
-      </>
-    );
   };
 
   return (
     <header className="mb-10 flex items-center justify-between gap-20">
       <Logo />
-      <ul className="flex flex-1 gap-8 text-sm tracking-wide text-black-variant-2">
-        {renderContent()}
-      </ul>
+      {renderContent()}
     </header>
   );
 };

@@ -30,3 +30,7 @@
     scrollbar-width: none; /* Firefox */
   }
 }
+
+::-webkit-scrollbar {
+  display: none;
+}

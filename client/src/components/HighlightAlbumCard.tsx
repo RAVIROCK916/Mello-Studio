@@ -26,7 +26,12 @@ const HighlightAlbumCard = ({ album }: PropsType) => {
             Trending New hits
           </span>
           <div className="my-6 space-y-4">
-            <h2 className="relative text-6xl font-bold">{album.name}</h2>
+            <h2
+              className="relative line-clamp-2 text-6xl font-bold"
+              title={album.name}
+            >
+              {album.name}
+            </h2>
             <p className="text-xl font-semibold">{album.artists[0].name}</p>
           </div>
           <div>

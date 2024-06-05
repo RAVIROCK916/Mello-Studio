@@ -11,14 +11,14 @@ import MusicPlayer from "./components/MusicPlayer";
 function App() {
   return (
     <Router>
-      <div className="px-12 py-8">
+      <div className="flex min-h-screen flex-col overflow-x-hidden px-12 py-8">
         <Header />
-        <main className="my-4 flex">
+        <main className="flex flex-col items-center justify-center">
           <SignedIn>
             <Routes>
               <Route path="/" element={<Dashboard />} />
             </Routes>
-            {/* <MusicPlayer /> */}
+            <MusicPlayer />
           </SignedIn>
           <SignedOut>
             <Routes>

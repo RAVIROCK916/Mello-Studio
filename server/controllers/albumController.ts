@@ -92,11 +92,12 @@ export const getGenreAlbums = async (
 	res: Response
 ) => {
 	const { token } = req;
+	const genre = req.params.name;
 
 	try {
 		const response = await axios.get(`${SPOTIFY_BASE_URL}/recommendations`, {
 			params: {
-				seed_genres: req.params.name,
+				seed_genres: genre,
 				limit: 5,
 			},
 			headers: {
@@ -108,7 +109,7 @@ export const getGenreAlbums = async (
 		console.error(error.message);
 		res
 			.status(500)
-			.json({ error: "An error occurred while fetching the genres!!!" });
+			.json({ error: "An error occurred while fetching the genre albums!!!" });
 	}
 	res.send("Genres sent");
 };

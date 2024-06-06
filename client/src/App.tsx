@@ -7,16 +7,20 @@ import Signup from "./pages/auth/Signup";
 import Dashboard from "./pages/dashboard/Dashboard";
 import { SignedIn, SignedOut } from "@clerk/clerk-react";
 import MusicPlayer from "./components/MusicPlayer";
+import Genre from "./pages/genre/Genre";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <Router>
       <div className="flex min-h-screen flex-col overflow-x-hidden px-12 py-8">
         <Header />
-        <main className="flex flex-col items-center justify-center">
+        <main className="flex justify-center">
           <SignedIn>
+            <Navbar />
             <Routes>
               <Route path="/" element={<Dashboard />} />
+              <Route path="/dashboard/genres/:genre" element={<Genre />} />
             </Routes>
             <MusicPlayer />
           </SignedIn>

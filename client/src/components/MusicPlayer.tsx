@@ -44,59 +44,57 @@ const MusicPlayer = () => {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 w-screen border-t border-t-secondary-1 bg-gradient-to-r from-secondary-2 to-white px-8 py-5">
-      <div className="flex items-center justify-between">
-        <audio
-          ref={audioRef}
-          src="path/to/your/song.mp3"
-          onTimeUpdate={handleTimeUpdate}
-          onLoadedMetadata={handleLoadedMetadata}
-          className="hidden"
-        ></audio>
-        <div className="flex items-end gap-3">
-          <div className="size-12 rounded-sm bg-black"></div>
-          <div>
-            <p className="text-lg font-bold">StarBoy</p>
-            <p className="text-xs font-semibold text-neutral-500">
-              The Weekend
-            </p>
-          </div>
-        </div>
-        <div className="flex flex-col items-center justify-between gap-3">
-          <div>
-            <Progress value={50} max={200} className="w-[500px]" />
-          </div>
-          <div className="flex items-center gap-6">
-            <BsFillSkipStartFill className="cursor-pointer text-xl" />
-            {isPlaying ? (
-              <FaPlayCircle
-                className="cursor-pointer text-2xl"
-                onClick={handlePlayPause}
-              />
-            ) : (
-              <FaPause
-                className="cursor-pointer text-2xl"
-                onClick={handlePlayPause}
-              />
-            )}
-            <BsFillSkipEndFill className="cursor-pointer text-xl" />
-          </div>
-        </div>
-        <div className="flex items-center gap-2">
-          {isMuted ? (
-            <FaVolumeMute
-              className="text-md cursor-pointer"
-              onClick={() => setIsMuted(false)}
-            />
-          ) : (
-            <FaVolumeLow
-              className="text-md cursor-pointer"
-              onClick={() => setIsMuted(true)}
-            />
-          )}
-          <Slider className="w-20 cursor-pointer" />
+    <div className="fixed bottom-0 left-0 flex w-screen items-center justify-between border-t border-t-secondary-1 bg-opacity-80 bg-gradient-to-r from-secondary-2 to-neutral-50 px-8 py-5">
+      {/* <div className="flex items-center justify-between"> */}
+      <audio
+        ref={audioRef}
+        src="path/to/your/song.mp3"
+        onTimeUpdate={handleTimeUpdate}
+        onLoadedMetadata={handleLoadedMetadata}
+        className="hidden"
+      ></audio>
+      <div className="flex items-end gap-3">
+        <div className="size-12 rounded-sm bg-black"></div>
+        <div>
+          <p className="text-lg font-bold">StarBoy</p>
+          <p className="text-xs font-semibold text-neutral-500">The Weekend</p>
         </div>
       </div>
+      <div className="flex flex-col items-center justify-between gap-3">
+        <div>
+          <Progress value={50} max={200} className="w-[500px]" />
+        </div>
+        <div className="flex items-center gap-6">
+          <BsFillSkipStartFill className="cursor-pointer text-xl" />
+          {isPlaying ? (
+            <FaPlayCircle
+              className="cursor-pointer text-2xl"
+              onClick={handlePlayPause}
+            />
+          ) : (
+            <FaPause
+              className="cursor-pointer text-2xl"
+              onClick={handlePlayPause}
+            />
+          )}
+          <BsFillSkipEndFill className="cursor-pointer text-xl" />
+        </div>
+      </div>
+      <div className="flex items-center gap-2">
+        {isMuted ? (
+          <FaVolumeMute
+            className="text-md cursor-pointer"
+            onClick={() => setIsMuted(false)}
+          />
+        ) : (
+          <FaVolumeLow
+            className="text-md cursor-pointer"
+            onClick={() => setIsMuted(true)}
+          />
+        )}
+        <Slider className="w-20 cursor-pointer" />
+      </div>
+      {/* </div> */}
     </div>
   );
 };

@@ -12,7 +12,7 @@ type Props = {
 
 const GenreCard = ({ item }: Props) => {
   return (
-    <Link to="/dashboard/genres">
+    <Link to={`/dashboard/genres/${item.genre}`}>
       <div
         className="relative size-48 overflow-hidden rounded-md bg-cover bg-center bg-no-repeat"
         style={{

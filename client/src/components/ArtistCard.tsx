@@ -39,7 +39,7 @@ const titleVariants = {
     y: -35,
     originX: 0,
     scale: 1.25,
-    color: "white",
+    color: "#fefefe",
     transition: {
       duration: 0.2,
       type: "tween",

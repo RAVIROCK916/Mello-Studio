@@ -2,8 +2,8 @@ import { useState } from "react";
 import {
   faBookOpen,
   faMusic,
+  faRadio,
   faSquareFull,
-  faVolumeLow,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
@@ -11,7 +11,7 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 const Navbar = () => {
   const navItems = [
     { value: "Home", icon: faMusic },
-    { value: "Genre", icon: faVolumeLow },
+    { value: "Genre", icon: faRadio },
     { value: "My Library", icon: faBookOpen },
   ];
 

@@ -9,6 +9,7 @@ import { SignedIn, SignedOut } from "@clerk/clerk-react";
 import MusicPlayer from "./components/MusicPlayer";
 import Genre from "./pages/genre/Genre";
 import Navbar from "./components/Navbar";
+import Artist from "./pages/artist/Artist";
 
 function App() {
   return (
@@ -20,9 +21,10 @@ function App() {
             <Navbar />
             <Routes>
               <Route path="/" element={<Dashboard />} />
-              <Route path="/dashboard/genres/:genre" element={<Genre />} />
+              <Route path="/dashboard/genre/:genre" element={<Genre />} />
+              <Route path="/dashboard/artist/:id" element={<Artist />} />
             </Routes>
-            <MusicPlayer />
+            {/* <MusicPlayer /> */}
           </SignedIn>
           <SignedOut>
             <Routes>

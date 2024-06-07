@@ -19,19 +19,6 @@ type Props = {
   };
 };
 
-const cardVariants = {
-  initial: {
-    opacity: 0,
-  },
-  animate: {
-    opacity: 1,
-    transition: {
-      duration: 0.2,
-      type: "tween",
-    },
-  },
-};
-
 const titleVariants = {
   initial: {},
   animate: {
@@ -48,6 +35,9 @@ const titleVariants = {
 };
 
 const ArtistCard = ({ item }: Props) => {
+  const { name } = item;
+  console.log(name);
+
   return (
     <motion.div
       className="flex flex-col gap-2"
@@ -55,9 +45,12 @@ const ArtistCard = ({ item }: Props) => {
       animate="initial"
       whileHover="animate"
     >
-      <Link to="/dashboard/genres">
+      <Link
+        to={`/dashboard/artist/${item.id}`}
+        state={{ name: "dasdasd", id: 1212 }}
+      >
         <div
-          className="size-48 overflow-hidden rounded-md bg-cover bg-center bg-no-repeat brightness-90 transition duration-[3000] hover:brightness-75"
+          className="duration-[3000] size-48 overflow-hidden rounded-md bg-cover bg-center bg-no-repeat brightness-90 transition hover:brightness-75"
           style={{
             backgroundImage: `url(${item.images[0].url})`,
           }}

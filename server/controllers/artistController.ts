@@ -97,3 +97,31 @@ export const getArtist = async (req: AuthenticatedRequest, res: Response) => {
 			.json({ error: "An error occurred while fetching the artist!!!" });
 	}
 };
+
+export const getArtistAlbums = async (
+	req: AuthenticatedRequest,
+	res: Response
+) => {
+	const {
+		token,
+		params: { id },
+	} = req;
+
+	try {
+		const response = await axios.get(`${ARTIST_URL}/${id}/albums`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+			params: {
+				include_groups: ["album", "single", "compilation"],
+				limit: 10,
+			},
+		});
+		res.json(response.data);
+	} catch (error: any) {
+		console.error(error.message);
+		res
+			.status(500)
+			.json({ error: "An error occurred while fetching the artist albums!!!" });
+	}
+};

@@ -7,7 +7,9 @@ export type AlbumType = {
   }[];
   images: {
     url: string;
-  }[];
+	}[];
+  release_date: string;
+  duration_ms: number;
 };
 
 export type ArtistType = {

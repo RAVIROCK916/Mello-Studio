@@ -18,7 +18,7 @@ interface Album extends AlbumType {
 const Genre = () => {
   const { genre } = useParams();
   const { data } = useQuery({
-    queryKey: ["genres"],
+    queryKey: ["genre", genre],
     queryFn: () => axios.get(`/api/albums/genres/${genre}`),
   });
   const albums = data?.data.tracks;
@@ -43,10 +43,10 @@ const Genre = () => {
                 {album.artists[0].name}
               </TableCell>
               <TableCell className="opacity-50">
-                <IoTimeOutline className="inline" />
+                <IoTimeOutline className="mr-1 inline align-text-bottom" />
                 {getDuration(album.duration_ms)}
               </TableCell>
-              <TableCell>...</TableCell>
+              <TableCell className="my-auto">...</TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -24,7 +24,7 @@ function App() {
               <Route path="/dashboard/genre/:genre" element={<Genre />} />
               <Route path="/dashboard/artist/:id" element={<Artist />} />
             </Routes>
-            {/* <MusicPlayer /> */}
+            <MusicPlayer />
           </SignedIn>
           <SignedOut>
             <Routes>

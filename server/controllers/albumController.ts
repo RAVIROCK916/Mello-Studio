@@ -5,6 +5,7 @@ import SPOTIFY_BASE_URL, {
 	NEW_ALBUM_RELEASES_URL,
 } from "../constants/api-urls";
 import type { AuthenticatedRequest } from "../types/requests";
+import type { AlbumType } from "../../client/src/types";
 
 export const getAlbums = async (req: AuthenticatedRequest, res: Response) => {
 	const { token } = req;
@@ -98,13 +99,16 @@ export const getGenreAlbums = async (
 		const response = await axios.get(`${SPOTIFY_BASE_URL}/recommendations`, {
 			params: {
 				seed_genres: genre,
-				limit: 5,
+				limit: 20,
 			},
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},
 		});
-		res.json(response.data);
+		const albums = response.data.tracks.filter(
+			(album: AlbumType) => album.preview_url
+		);
+		res.json(albums);
 	} catch (error: any) {
 		console.error(error.message);
 		res

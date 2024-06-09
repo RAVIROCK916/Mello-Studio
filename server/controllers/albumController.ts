@@ -3,6 +3,7 @@ import type { Response } from "express";
 import SPOTIFY_BASE_URL, {
 	ALBUM_URL,
 	NEW_ALBUM_RELEASES_URL,
+	SPOTIFY_SEARCH_URL,
 } from "../constants/api-urls";
 import type { AuthenticatedRequest } from "../types/requests";
 import type { AlbumType } from "../../client/src/types";
@@ -14,6 +15,10 @@ export const getAlbums = async (req: AuthenticatedRequest, res: Response) => {
 		.get(ALBUM_URL, {
 			headers: {
 				Authorization: `Bearer ${token}`,
+			},
+			params: {
+				type: "album",
+				limit: 20,
 			},
 		})
 		.then((response) => {
@@ -137,5 +142,32 @@ export const getAlbum = async (req: AuthenticatedRequest, res: Response) => {
 		res
 			.status(500)
 			.json({ error: "An error occurred while fetching the album!!!" });
+	}
+};
+
+export const getAlbumsSearch = async (
+	req: AuthenticatedRequest,
+	res: Response
+) => {
+	const { token } = req;
+	const { q } = req.params;
+
+	try {
+		const response = await axios.get(`${SPOTIFY_SEARCH_URL}`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+			params: {
+				q: q,
+				type: "album",
+				limit: 20,
+			},
+		});
+		res.json(response.data);
+	} catch (error: any) {
+		console.error(error.message);
+		res
+			.status(500)
+			.json({ error: "An error occurred while fetching the albums!!!" });
 	}
 };

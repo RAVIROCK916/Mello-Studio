@@ -50,7 +50,7 @@ const authAccess = async (
 
 app.use(authAccess);
 
-app.use("/api/artists", artistRouter);
 app.use("/api/albums", albumRouter);
+app.use("/api/artists", artistRouter);
 
 app.listen(PORT, () => console.log("Listening on", PORT));

@@ -1,3 +1,4 @@
+import type { AlbumType } from "./../../client/src/types/index";
 import axios from "axios";
 import SPOTIFY_BASE_URL, { ARTIST_URL } from "../constants/api-urls";
 import type { AuthenticatedRequest } from "../types/requests";
@@ -108,15 +109,23 @@ export const getArtistAlbums = async (
 	} = req;
 
 	try {
-		const response = await axios.get(`${ARTIST_URL}/${id}/albums`, {
+		const response = await axios.get(`${ARTIST_URL}/${id}/top-tracks`, {
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},
 			params: {
-				include_groups: ["album", "single", "compilation"],
-				limit: 10,
+				// include_groups: ["album", "single", "compilation"],
+				limit: 20,
 			},
 		});
+		const albums = response.data.tracks.filter(
+			(album: AlbumType) => album.preview_url
+		);
+		if (albums.length >= 5) {
+			response.data.tracks = albums;
+		} else {
+			response.data.tracks = response.data.tracks;
+		}
 		res.json(response.data);
 	} catch (error: any) {
 		console.error(error.message);

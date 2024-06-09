@@ -24,25 +24,24 @@ const Genre = () => {
     queryFn: () => axios.get(`/api/albums/genres/${genre}`),
   });
   const albums = data?.data;
-  console.log(data);
 
-  const { current, setCurrent, addToQueue } = useAlbumsStore((state) => ({
+  const { setCurrent, addToQueue } = useAlbumsStore((state) => ({
     current: state.current,
     setCurrent: state.setCurrent,
     addToQueue: state.addToQueue,
   }));
+
   const addPlaylist = () => {
     addToQueue(albums);
     setCurrent(albums[0]);
   };
-  console.log("current album", current);
 
   return (
     <div className="flex-1">
-      <div className="mb-4 h-48 space-y-6 rounded-md bg-indigo-200 px-6 py-4">
+      <div className="mb-4 flex h-48 flex-col items-start justify-between space-y-6 rounded-md bg-indigo-200 px-6 py-4 uppercase">
         <h1 className="text-8xl font-bold text-white">{genre}</h1>
         <button
-          className="flex items-center justify-between gap-2 rounded-full bg-primary-1 px-6 py-2 text-white"
+          className="flex items-center justify-between gap-2 rounded-md bg-primary-2 px-6 py-2 text-white transition-colors hover:bg-primary-2/90"
           onClick={addPlaylist}
         >
           <p>Play</p>

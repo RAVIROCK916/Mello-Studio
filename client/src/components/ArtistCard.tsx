@@ -35,8 +35,7 @@ const titleVariants = {
 };
 
 const ArtistCard = ({ item }: Props) => {
-  const { name } = item;
-  console.log(name);
+  const { id, name, images } = item;
 
   return (
     <motion.div
@@ -46,18 +45,18 @@ const ArtistCard = ({ item }: Props) => {
       whileHover="animate"
     >
       <Link
-        to={`/dashboard/artist/${item.id}`}
+        to={`/dashboard/artist/${id}`}
         state={{ name: "dasdasd", id: 1212 }}
       >
         <div
           className="duration-[3000] size-48 overflow-hidden rounded-md bg-cover bg-center bg-no-repeat brightness-90 transition hover:brightness-75"
           style={{
-            backgroundImage: `url(${item.images[0].url})`,
+            backgroundImage: `url(${images[0].url})`,
           }}
         ></div>
       </Link>
       <motion.h1 className="font-bold" variants={titleVariants}>
-        {item.name}
+        {name}
       </motion.h1>
     </motion.div>
   );

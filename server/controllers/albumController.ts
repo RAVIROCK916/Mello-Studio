@@ -17,8 +17,9 @@ export const getAlbums = async (req: AuthenticatedRequest, res: Response) => {
 				Authorization: `Bearer ${token}`,
 			},
 			params: {
-				type: "album",
-				limit: 20,
+				type: "track",
+				// ids: "382ObEPsp2rxGrnsizN5TX,1A2GTWGtFfWp7KSQTwWOyo,2noRn2Aes5aoNVsU6iWThc",
+				// limit: 20,
 			},
 		})
 		.then((response) => {
@@ -159,8 +160,8 @@ export const getAlbumsSearch = async (
 			},
 			params: {
 				q: q,
-				type: "album",
-				limit: 20,
+				type: "track",
+				limit: 10,
 			},
 		});
 		res.json(response.data);

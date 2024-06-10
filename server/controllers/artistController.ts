@@ -134,3 +134,31 @@ export const getArtistAlbums = async (
 			.json({ error: "An error occurred while fetching the artist albums!!!" });
 	}
 };
+
+export const getArtistsSearch = async (
+	req: AuthenticatedRequest,
+	res: Response
+) => {
+	const { token } = req;
+	const { q } = req.params;
+
+	try {
+		const response = await axios.get(`${SPOTIFY_BASE_URL}/search`, {
+			params: {
+				q,
+				type: "artist",
+				limit: 10,
+			},
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
+		res.json(response.data);
+	} catch (error: any) {
+		console.error(error.message);
+		res
+			.status(500)
+			.json({ error: "An error occurred while fetching the artists!!!" });
+	}
+	res.send("Artists sent");
+};

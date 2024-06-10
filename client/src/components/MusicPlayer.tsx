@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaVolumeMute } from "react-icons/fa";
 import { FaPause, FaPlay, FaVolumeLow } from "react-icons/fa6";
 import { BsFillSkipEndFill, BsFillSkipStartFill } from "react-icons/bs";
@@ -16,10 +16,24 @@ const MusicPlayer = () => {
   const [duration, setDuration] = useState(0);
   const audioRef: React.RefObject<HTMLAudioElement> = useRef(null);
 
-  const { currentAlbum, queue, playNext } = useAlbumsStore((state) => ({
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.code === "Space") {
+      handlePlayPause();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  });
+
+  const { currentAlbum, playNext, playPrev } = useAlbumsStore((state) => ({
     currentAlbum: state.current,
     queue: state.queue,
     playNext: state.playNext,
+    playPrev: state.playPrev,
   }));
 
   const handlePlayPause = () => {
@@ -39,6 +53,7 @@ const MusicPlayer = () => {
 
   const handleLoadedMetadata = () => {
     if (audioRef.current) {
+      audioRef.current.volume = volume / 100;
       setDuration(audioRef.current.duration);
       setIsPlaying(true);
     }
@@ -62,6 +77,7 @@ const MusicPlayer = () => {
   const handleEnded = () => {
     setIsPlaying(false);
     playNext();
+    setCurrentTime(0);
     if (currentAlbum) setIsPlaying(true);
   };
 
@@ -73,15 +89,6 @@ const MusicPlayer = () => {
   };
   const handleMute = () => {
     setIsMuted(!isMuted);
-    if (audioRef.current) {
-      if (!isMuted) {
-        audioRef.current.muted = true;
-        setVolume(0);
-      } else {
-        audioRef.current.muted = false;
-        setVolume(70);
-      }
-    }
   };
 
   return (
@@ -89,7 +96,8 @@ const MusicPlayer = () => {
       <div className="fixed bottom-0 left-0 flex w-screen items-center justify-between border-t border-t-secondary-1 bg-opacity-80 bg-gradient-to-r from-secondary-2 to-neutral-50 px-8 py-5 *:flex-1">
         <audio
           ref={audioRef}
-          src={currentAlbum?.preview_url}
+          src={currentAlbum.preview_url}
+          muted={isMuted}
           onTimeUpdate={handleTimeUpdate}
           onLoadedMetadata={handleLoadedMetadata}
           onEnded={handleEnded}
@@ -99,7 +107,13 @@ const MusicPlayer = () => {
         {/* album title and info */}
         <div className="flex items-end gap-3">
           <div className="size-12 overflow-hidden rounded-sm">
-            <img src={currentAlbum?.album.images[0].url} alt="" />
+            <img
+              src={
+                currentAlbum?.album?.images[0].url ||
+                currentAlbum?.images[0].url
+              }
+              alt=""
+            />
           </div>
           <div>
             <p className="text-lg font-bold">{currentAlbum?.name}</p>
@@ -118,12 +132,15 @@ const MusicPlayer = () => {
             />
           </div>
           <div className="flex items-center gap-4">
-            <BsFillSkipStartFill className="cursor-pointer text-xl" />
+            <BsFillSkipStartFill
+              className="cursor-pointer text-xl"
+              onClick={playPrev}
+            />
             <HiRewind
               className="cursor-pointer text-xl"
               onClick={handleRewind}
             />
-            <div
+            <button
               className="relative flex size-7 cursor-pointer items-center justify-center rounded-full bg-black"
               onClick={handlePlayPause}
             >
@@ -135,12 +152,15 @@ const MusicPlayer = () => {
                   onClick={handlePlayPause}
                 />
               )}
-            </div>
+            </button>
             <HiFastForward
               className="cursor-pointer text-xl"
               onClick={handleForward}
             />
-            <BsFillSkipEndFill className="cursor-pointer text-xl" />
+            <BsFillSkipEndFill
+              className="cursor-pointer text-xl"
+              onClick={playNext}
+            />
           </div>
         </div>
         {/* volume slider */}

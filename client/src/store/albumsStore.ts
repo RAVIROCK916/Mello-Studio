@@ -19,8 +19,8 @@ export interface AlbumsState {
     size: number;
     songs: Album[];
   };
-	playNext: () => void;
-	playPrev: () => void;
+  playNext: () => void;
+  playPrev: () => void;
   addToQueue: (albums: Album[]) => void;
 }
 
@@ -55,12 +55,15 @@ const useAlbumsStore = create<AlbumsState>((set) => ({
   setCurrent: (album: Album) => {
     set((state) => ({
       current: album,
-      next: state.queue.songs[0] || null,
+      next: state.queue.songs[1] || null,
     }));
   },
   addToQueue: (albums: Album[]) => {
     set(
       produce((state) => {
+        state.current = albums[0];
+        console.log(state.current);
+
         state.queue.songs = albums;
       }),
     );

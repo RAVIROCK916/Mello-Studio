@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import ArtistCard from "./ArtistCard";
 import GenreCard from "./GenreCard";
 import axios from "axios";
+import AlbumCard from "./AlbumCard";
 
 type PropsType = {
   title: string;
@@ -25,6 +26,13 @@ const SongsCards = ({ title, type }: PropsType) => {
         queryFn: () => axios.get("/api/artists/top"),
       });
       break;
+    case "album":
+      Card = AlbumCard;
+      query = useQuery({
+        queryKey: ["albums"],
+        queryFn: () => axios.get("/api/albums/new-releases"),
+      });
+      break;
     default:
       Card = GenreCard;
       query = useQuery({
@@ -39,9 +47,7 @@ const SongsCards = ({ title, type }: PropsType) => {
     <div className="flex flex-col gap-2">
       <h1 className="text-2xl font-bold">{title}</h1>
       <div className="horizontal-scroll flex gap-8">
-        {data?.data.map((item: any, i: number) => (
-          <Card item={item} key={i + 1} />
-        ))}
+        {data?.data.map((item: any) => <Card item={item} key={item.id} />)}
       </div>
     </div>
   );

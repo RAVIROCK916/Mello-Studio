@@ -10,19 +10,21 @@ import MusicPlayer from "./components/MusicPlayer";
 import Genre from "./pages/genre/Genre";
 import Navbar from "./components/Navbar";
 import Artist from "./pages/artist/Artist";
+import Search from "./pages/search/Search";
 
 function App() {
   return (
     <Router>
       <div className="flex min-h-screen flex-col overflow-x-hidden px-12 py-8">
         <Header />
-        <main className="flex justify-center">
+        <main className="mb-16 flex justify-center">
           <SignedIn>
             <Navbar />
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/dashboard/genre/:genre" element={<Genre />} />
               <Route path="/dashboard/artist/:id" element={<Artist />} />
+              <Route path="/dashboard/search/" element={<Search />} />
             </Routes>
             <MusicPlayer />
           </SignedIn>

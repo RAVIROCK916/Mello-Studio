@@ -25,7 +25,7 @@ const Genre = () => {
   });
   const albums = data?.data;
 
-  const { setCurrent, addToQueue } = useAlbumsStore((state) => ({
+  const { addToQueue } = useAlbumsStore((state) => ({
     current: state.current,
     setCurrent: state.setCurrent,
     addToQueue: state.addToQueue,
@@ -33,7 +33,6 @@ const Genre = () => {
 
   const addPlaylist = () => {
     addToQueue(albums);
-    setCurrent(albums[0]);
   };
 
   return (
@@ -54,9 +53,9 @@ const Genre = () => {
             <TableRow
               key={album.id}
               className="cursor-pointer"
-              onClick={() => setCurrent(album)}
+              onClick={() => addToQueue(albums.slice(idx))}
             >
-              <TableCell className="">{idx + 1}</TableCell>
+              <TableCell>{idx + 1}</TableCell>
               <TableCell>
                 <div className="w-max overflow-hidden rounded-sm">
                   <img src={album.album.images[0].url} width={40} alt="" />

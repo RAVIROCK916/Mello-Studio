@@ -25,7 +25,6 @@ const Artist = () => {
   });
 
   const artist = artistData.data?.data;
-  console.log("dsfdsf", artist);
 
   const { setCurrent, addToQueue } = useAlbumsStore((state) => ({
     current: state.current,
@@ -40,10 +39,10 @@ const Artist = () => {
 
   const addPlaylist = () => {
     addToQueue(albums);
-    setCurrent(albums[0]);
   };
 
   const albums = artist_albums.data?.data.tracks;
+  console.log(albums);
 
   if (artist_albums.isLoading) {
     return <div>Loading...</div>;
@@ -65,7 +64,9 @@ const Artist = () => {
         <div className="flex flex-col items-start justify-end gap-4 font-bold">
           <div className="space-y-2">
             <h1 className="text-6xl text-black">{artist.name}</h1>
-            <p className="font-semibold">{artist.followers.total} followers</p>
+            <p className="font-semibold">
+              {artist.followers.total.toLocaleString()} followers
+            </p>
           </div>
           <button
             className="flex items-center justify-between gap-2 rounded-md bg-primary-2 px-6 py-2 text-neutral-50 transition-colors hover:bg-primary-2/90"
@@ -82,7 +83,7 @@ const Artist = () => {
             <TableRow
               key={album.id}
               className="cursor-pointer"
-              onClick={() => setCurrent(album)}
+              onClick={() => addToQueue(albums.slice(idx))}
             >
               <TableCell>{idx + 1}</TableCell>
               <TableCell>

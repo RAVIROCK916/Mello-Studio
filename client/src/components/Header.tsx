@@ -8,6 +8,7 @@ import {
   MdSearch,
 } from "react-icons/md";
 import { UserButton, useUser } from "@clerk/clerk-react";
+import SearchBar from "./SearchBar";
 
 const Header = () => {
   const user = useUser();
@@ -18,15 +19,8 @@ const Header = () => {
   const renderContent = () => {
     if (user.isSignedIn) {
       return (
-        <div className="flex flex-1 items-center justify-between gap-6">
-          <div className="relative flex-1">
-            <MdSearch className="absolute right-[2%] top-[50%] -translate-y-1/2 transform cursor-pointer text-lg" />
-            <input
-              type="text"
-              placeholder="Search"
-              className="w-full rounded-md bg-neutral-100 px-4 py-2"
-            />
-          </div>
+        <div className="flex flex-1 items-center justify-end gap-6">
+          <SearchBar />
           <div className="flex items-center gap-4">
             <div className={iconItemStyle}>
               <MdNotificationsNone />

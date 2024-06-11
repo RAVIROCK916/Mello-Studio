@@ -11,6 +11,7 @@ import Genre from "./pages/genre/Genre";
 import Navbar from "./components/Navbar";
 import Artist from "./pages/artist/Artist";
 import Search from "./pages/search/Search";
+import Queue from "./pages/queue/Queue";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
               <Route path="/dashboard/genre/:genre" element={<Genre />} />
               <Route path="/dashboard/artist/:id" element={<Artist />} />
               <Route path="/dashboard/search/" element={<Search />} />
+              <Route path="/dashboard/queue" element={<Queue />} />
             </Routes>
             <MusicPlayer />
           </SignedIn>

@@ -18,5 +18,6 @@ export type ArtistType = {
   name: string;
   images: {
     url: string;
-  }[];
+	}[];
+	type: string;
 };

@@ -4,8 +4,13 @@ import { AlbumType } from "@/types";
 
 interface Album extends AlbumType {
   album: {
+    name: string;
     images: {
       url: string;
+    }[];
+    artists: {
+      id: string;
+      name: string;
     }[];
   };
 }
@@ -35,7 +40,7 @@ const useAlbumsStore = create<AlbumsState>((set) => ({
   playNext: () => {
     set(
       produce((state) => {
-        if (state.queue.currSong + 1 < state.queue.size) {
+        if (state.queue.currSong + 1 < state.queue.songs.length) {
           state.queue.currSong = state.queue.currSong + 1;
           state.current = state.queue.songs[state.queue.currSong];
         }
@@ -59,12 +64,12 @@ const useAlbumsStore = create<AlbumsState>((set) => ({
     }));
   },
   addToQueue: (albums: Album[]) => {
+    const albumsWithPreview = albums.filter((album) => album.preview_url);
     set(
       produce((state) => {
-        state.current = albums[0];
-        console.log(state.current);
-
-        state.queue.songs = albums;
+        state.current = albumsWithPreview[0];
+        state.queue.songs = albumsWithPreview;
+        state.queue.currSong = 0;
       }),
     );
   },

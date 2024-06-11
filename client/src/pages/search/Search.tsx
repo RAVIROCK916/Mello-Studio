@@ -8,6 +8,7 @@ import useAlbumsStore from "@/store/albumsStore";
 import SongsCards from "@/components/SongsCards";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import useDebounce from "@/hooks/useDebounce";
 
 const Search = () => {
   const { search } = useSearchStore();
@@ -32,6 +33,8 @@ const Search = () => {
   let albums: Album[] = [],
     artists: ArtistType[] = [];
 
+  const debouncedSearch = useDebounce(search, 1000);
+
   const { data: newReleases } = useQuery({
     queryKey: ["trending-albums-search", ""],
     queryFn: () => axios.get(`/api/albums/new-releases`),
@@ -39,15 +42,15 @@ const Search = () => {
   });
 
   const { data: searchResults } = useQuery({
-    queryKey: ["albums-search", search],
-    queryFn: () => axios.get(`/api/albums/search/${search}`),
-    enabled: search.trim().length > 0,
+    queryKey: ["albums-search", debouncedSearch],
+    queryFn: () => axios.get(`/api/albums/search/${debouncedSearch}`),
+    enabled: debouncedSearch.trim().length > 0,
   });
 
   const { data: artistResults } = useQuery({
-    queryKey: ["artists-search", search],
-    queryFn: () => axios.get(`/api/artists/search/${search}`),
-    enabled: search.trim().length > 0,
+    queryKey: ["artists-search", debouncedSearch],
+    queryFn: () => axios.get(`/api/artists/search/${debouncedSearch}`),
+    enabled: debouncedSearch.trim().length > 0,
   });
 
   albums =
@@ -126,7 +129,9 @@ const Search = () => {
                     className="flex items-center gap-8"
                   >
                     <div className="size-20 overflow-hidden rounded-full">
-                      <img src={artist.images[0].url} alt="" />
+                      {artist.images?.length > 0 && (
+                        <img src={artist.images[0].url} alt="" />
+                      )}
                     </div>
                     <div>
                       <h4 className="font-semibold">{artist.name}</h4>

@@ -19,7 +19,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="relative ml-px w-1/6">
+      <nav className="relative ml-px w-60">
         <ul className="relative -left-12 space-y-3 text-sm font-bold">
           {navItems.map((navItem, index) => {
             let Icon = navItem.icon as IconProp;
@@ -47,6 +47,12 @@ const Navbar = () => {
               </li>
             );
           })}
+        </ul>
+        <ul className="mt-8 space-y-8 text-sm font-bold opacity-40">
+          <li>John Doe</li>
+          <li>Hip Hop Remixes</li>
+          <li>All out of 10s</li>
+          <li>Hollywood undead</li>
         </ul>
       </nav>
     </>

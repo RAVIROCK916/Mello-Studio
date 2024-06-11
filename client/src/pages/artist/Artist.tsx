@@ -1,11 +1,12 @@
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import useAlbumsStore from "@/store/albumsStore";
 import { AlbumType } from "@/types";
+import { getDuration } from "@/utils/getDuration";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useEffect } from "react";
 import { FaPlay } from "react-icons/fa";
-import { useLocation, useParams } from "react-router-dom";
+import { IoTimeOutline } from "react-icons/io5";
+import { useParams } from "react-router-dom";
 
 const Artist = () => {
   const { id } = useParams();
@@ -94,6 +95,10 @@ const Artist = () => {
               <TableCell>{album.name}</TableCell>
               <TableCell className="opacity-40">
                 {album.artists.map((artist) => artist.name).join(", ")}
+              </TableCell>
+              <TableCell className="opacity-50">
+                <IoTimeOutline className="mr-1 inline align-text-bottom" />
+                {getDuration(album.duration_ms)}
               </TableCell>
               <TableCell className="opacity-40">
                 {album.album.release_date}

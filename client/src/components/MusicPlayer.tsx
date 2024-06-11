@@ -16,11 +16,12 @@ const MusicPlayer = () => {
   const [duration, setDuration] = useState(0);
   const audioRef: React.RefObject<HTMLAudioElement> = useRef(null);
 
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.code === "Space") {
-      handlePlayPause();
-    }
-  };
+  const { currentAlbum, playNext, playPrev } = useAlbumsStore((state) => ({
+    currentAlbum: state.current,
+    queue: state.queue,
+    playNext: state.playNext,
+    playPrev: state.playPrev,
+  }));
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
@@ -29,12 +30,17 @@ const MusicPlayer = () => {
     };
   });
 
-  const { currentAlbum, playNext, playPrev } = useAlbumsStore((state) => ({
-    currentAlbum: state.current,
-    queue: state.queue,
-    playNext: state.playNext,
-    playPrev: state.playPrev,
-  }));
+  useEffect(() => {
+    if (!currentAlbum?.preview_url) {
+      playNext();
+    }
+  }, [currentAlbum]);
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.code === "Space") {
+      handlePlayPause();
+    }
+  };
 
   const handlePlayPause = () => {
     if (isPlaying) {
@@ -77,8 +83,12 @@ const MusicPlayer = () => {
   const handleEnded = () => {
     setIsPlaying(false);
     playNext();
-    setCurrentTime(0);
-    if (currentAlbum) setIsPlaying(true);
+    if (currentAlbum?.preview_url) {
+      setCurrentTime(0);
+      setIsPlaying(true);
+    } else if (audioRef.current) {
+      setCurrentTime(audioRef.current.duration);
+    }
   };
 
   const handleVolume = (value: number[]) => {
@@ -98,8 +108,10 @@ const MusicPlayer = () => {
           ref={audioRef}
           src={currentAlbum.preview_url}
           muted={isMuted}
-          onTimeUpdate={handleTimeUpdate}
           onLoadedMetadata={handleLoadedMetadata}
+          onTimeUpdate={handleTimeUpdate}
+          onPlay={() => setIsPlaying(true)}
+          onPause={() => setIsPlaying(false)}
           onEnded={handleEnded}
           className="hidden"
           autoPlay

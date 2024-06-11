@@ -6,13 +6,22 @@ import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import useAlbumsStore from "@/store/albumsStore";
 import SongsCards from "@/components/SongsCards";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Search = () => {
   const { search } = useSearchStore();
   const { addToQueue } = useAlbumsStore();
+  const [currTab, setCurrTab] = useState("albums");
+  const navigate = useNavigate();
 
   interface Album extends AlbumType {
     album: {
+      name: string;
+      artists: {
+        id: string;
+        name: string;
+      }[];
       images: {
         url: string;
       }[];
@@ -46,10 +55,7 @@ const Search = () => {
       ? newReleases?.data
       : searchResults?.data?.tracks?.items;
 
-  artists = artistResults?.data.items;
-  console.log(artistResults?.data.items);
-
-  console.log(albums);
+  artists = artistResults?.data.artists.items;
 
   return (
     <div className="flex-1">
@@ -59,12 +65,24 @@ const Search = () => {
             <SongsCards title="Trending Searches" type="album" />
           </div>
         ) : (
-          <Tabs defaultValue="albums" className="mx-auto max-w-6xl">
+          <Tabs
+            defaultValue="albums"
+            className="mx-auto max-w-6xl"
+            value={currTab}
+          >
             <TabsList className="w-full">
-              <TabsTrigger value="albums" className="w-full">
+              <TabsTrigger
+                value="albums"
+                className="w-full"
+                onClick={() => setCurrTab("albums")}
+              >
                 Albums
               </TabsTrigger>
-              <TabsTrigger value="artists" className="w-full">
+              <TabsTrigger
+                value="artists"
+                className="w-full"
+                onClick={() => setCurrTab("artists")}
+              >
                 Artists
               </TabsTrigger>
             </TabsList>
@@ -77,6 +95,7 @@ const Search = () => {
                       className="cursor-pointer"
                       onClick={() => {
                         addToQueue(albums.slice(idx));
+                        navigate("/dashboard/queue");
                       }}
                     >
                       <TableCell className="flex items-center gap-6">
@@ -101,12 +120,19 @@ const Search = () => {
             <TabsContent value="artists" className="mt-6 space-y-6">
               {artists?.length > 0 &&
                 artists.map((artist) => (
-                  <div key={artist.id} className="flex items-center gap-4">
+                  <Link
+                    to={`/dashboard/artist/${artist.id}`}
+                    key={artist.id}
+                    className="flex items-center gap-8"
+                  >
                     <div className="size-20 overflow-hidden rounded-full">
                       <img src={artist.images[0].url} alt="" />
                     </div>
-                    <h4 className="font-semibold">{artist.name}</h4>
-                  </div>
+                    <div>
+                      <h4 className="font-semibold">{artist.name}</h4>
+                      <p className="opacity-60">{artist.type}</p>
+                    </div>
+                  </Link>
                 ))}
             </TabsContent>
           </Tabs>

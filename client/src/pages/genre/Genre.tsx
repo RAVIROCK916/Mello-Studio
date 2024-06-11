@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { FaPlay } from "react-icons/fa6";
 import { IoTimeOutline } from "react-icons/io5";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface Album extends AlbumType {
   album: {
@@ -18,6 +18,7 @@ interface Album extends AlbumType {
 }
 
 const Genre = () => {
+  const navigate = useNavigate();
   const { genre } = useParams();
   const { data } = useQuery({
     queryKey: ["genre", genre],
@@ -37,7 +38,7 @@ const Genre = () => {
 
   return (
     <div className="flex-1">
-      <div className="mb-4 flex h-48 flex-col items-start justify-between space-y-6 rounded-md bg-indigo-200 px-6 py-4 uppercase">
+      <div className="mb-4 flex h-48 flex-col items-start justify-between space-y-6 rounded-md bg-gradient-to-r from-indigo-200 px-6 py-4 uppercase">
         <h1 className="text-8xl font-bold text-white">{genre}</h1>
         <button
           className="flex items-center justify-between gap-2 rounded-md bg-primary-2 px-6 py-2 text-white transition-colors hover:bg-primary-2/90"
@@ -53,7 +54,10 @@ const Genre = () => {
             <TableRow
               key={album.id}
               className="cursor-pointer"
-              onClick={() => addToQueue(albums.slice(idx))}
+              onClick={() => {
+                addToQueue(albums.slice(idx));
+                navigate("/dashboard/queue");
+              }}
             >
               <TableCell>{idx + 1}</TableCell>
               <TableCell>

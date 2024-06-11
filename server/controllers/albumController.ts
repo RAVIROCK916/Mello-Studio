@@ -18,8 +18,8 @@ export const getAlbums = async (req: AuthenticatedRequest, res: Response) => {
 			},
 			params: {
 				type: "track",
-				// ids: "382ObEPsp2rxGrnsizN5TX,1A2GTWGtFfWp7KSQTwWOyo,2noRn2Aes5aoNVsU6iWThc",
-				// limit: 20,
+				ids: "382ObEPsp2rxGrnsizN5TX,1A2GTWGtFfWp7KSQTwWOyo,2noRn2Aes5aoNVsU6iWThc", // required, comma-separated list of the Spotify IDs of the albums to return
+				limit: 10,
 			},
 		})
 		.then((response) => {

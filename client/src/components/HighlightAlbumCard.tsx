@@ -27,7 +27,7 @@ const HighlightAlbumCard = ({ album }: PropsType) => {
           </span>
           <div className="my-6 space-y-4">
             <h2
-              className="relative line-clamp-2 text-6xl font-bold"
+              className="relative line-clamp-1 text-6xl font-bold"
               title={album.name}
             >
               {album.name}
@@ -36,7 +36,7 @@ const HighlightAlbumCard = ({ album }: PropsType) => {
           </div>
           <div>
             <motion.button
-              className="rounded-full bg-gradient-to-br from-primary-1 to-primary-2 px-8 py-2.5 text-xs font-semibold transition-colors duration-[3000] ease-in-out hover:bg-gradient-to-bl"
+              className="duration-[3000] rounded-full bg-gradient-to-br from-primary-1 to-primary-2 px-8 py-2.5 text-xs font-semibold transition-colors ease-in-out hover:bg-gradient-to-bl"
               whileHover={{
                 backgroundImage:
                   "linear-gradient(to bottom right, #45BED5, #E21376)",

@@ -70,7 +70,7 @@ const Search = () => {
         ) : (
           <Tabs
             defaultValue="albums"
-            className="mx-auto max-w-6xl"
+            className="mx-auto max-w-5xl"
             value={currTab}
           >
             <TabsList className="w-full">
@@ -91,7 +91,7 @@ const Search = () => {
             </TabsList>
             <TabsContent value="albums">
               <Table>
-                <TableBody className="font-semibold">
+                <TableBody className="font-semibold dark:text-neutral-50">
                   {albums.map((album: Album, idx: number) => (
                     <TableRow
                       key={album.id}
@@ -120,7 +120,10 @@ const Search = () => {
                 </TableBody>
               </Table>
             </TabsContent>
-            <TabsContent value="artists" className="mt-6 space-y-6">
+            <TabsContent
+              value="artists"
+              className="mt-6 space-y-6 text-neutral-100"
+            >
               {artists?.length > 0 &&
                 artists.map((artist) => (
                   <Link

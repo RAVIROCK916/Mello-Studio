@@ -103,7 +103,7 @@ const MusicPlayer = () => {
 
   return (
     currentAlbum && (
-      <div className="fixed bottom-0 left-0 flex w-screen items-center justify-between border-t border-t-secondary-1 bg-opacity-80 bg-gradient-to-r from-secondary-2 to-neutral-50 px-8 py-5 *:flex-1">
+      <div className="dark:from-dark-1 dark:to-dark-2 fixed bottom-0 left-0 flex w-screen items-center justify-between border-t border-t-secondary-1 bg-opacity-80 bg-gradient-to-r from-secondary-2 to-neutral-50 px-8 py-5 *:flex-1">
         <audio
           ref={audioRef}
           src={currentAlbum.preview_url}
@@ -140,7 +140,7 @@ const MusicPlayer = () => {
             <Progress
               value={(currentTime / duration) * 100}
               max={100}
-              className="w-[500px]"
+              className="w-[500px] dark:bg-neutral-700 dark:text-primary-2"
             />
           </div>
           <div className="flex items-center gap-4">
@@ -153,7 +153,7 @@ const MusicPlayer = () => {
               onClick={handleRewind}
             />
             <button
-              className="relative flex size-7 cursor-pointer items-center justify-center rounded-full bg-black"
+              className="relative flex size-7 cursor-pointer items-center justify-center rounded-full bg-black dark:bg-primary-1"
               onClick={handlePlayPause}
             >
               {isPlaying && currentAlbum ? (

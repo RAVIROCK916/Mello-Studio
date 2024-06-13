@@ -19,7 +19,7 @@ const HighlightAlbumCard = ({ album }: PropsType) => {
   const artists = data?.data;
 
   return (
-    <div className="flex h-64 min-w-full max-w-full flex-1 snap-center overflow-hidden rounded-md bg-tertiary-1 text-white">
+    <div className="flex h-64 min-w-full max-w-full flex-1 snap-center overflow-hidden rounded-md bg-tertiary-1 text-white dark:bg-tertiary-2">
       <div className="flex-1">
         <div className="flex h-full flex-col justify-between px-10 py-6">
           <span className="text-sm font-medium text-neutral-300/70">

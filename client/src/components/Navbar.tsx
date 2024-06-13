@@ -28,7 +28,7 @@ const Navbar = () => {
                 className={
                   "flex cursor-pointer items-center gap-2 border-l-4 border-transparent px-12 py-4 text-black-variant-2 hover:text-black-variant-2/90 " +
                   (activeNavItem === navItem.value
-                    ? "!border-secondary-1 bg-gradient-to-r from-secondary-1/5 to-secondary-2/10 text-secondary-1 hover:!text-secondary-1/90"
+                    ? "!border-secondary-1 bg-gradient-to-r from-secondary-1/5 to-secondary-2/10 text-secondary-1 hover:!text-secondary-1/90 dark:from-secondary-1/10 dark:to-black"
                     : "")
                 }
                 onClick={() => setActiveNavItem(navItem.value)}
@@ -36,7 +36,7 @@ const Navbar = () => {
               >
                 {activeNavItem === navItem.value ? (
                   <FontAwesomeIcon
-                    className="bg-gradient-to-r from-primary-1 from-50% via-primary-2 via-50% to-primary-2 text-base text-white"
+                    className="bg-gradient-to-r from-primary-1 from-50% via-primary-2 via-50% to-primary-2 text-base text-white dark:text-black/95"
                     icon={Icon}
                     mask={faSquareFull}
                   />

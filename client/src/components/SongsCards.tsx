@@ -45,7 +45,7 @@ const SongsCards = ({ title, type }: PropsType) => {
 
   return (
     <div className="flex flex-col gap-2">
-      <h1 className="text-2xl font-bold">{title}</h1>
+      <h1 className="text-2xl font-bold dark:text-neutral-100">{title}</h1>
       <div className="horizontal-scroll flex gap-8">
         {data?.data.map((item: any, idx: number) => (
           <Card item={item} key={idx + 1} />

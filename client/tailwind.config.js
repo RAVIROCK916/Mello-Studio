@@ -28,11 +28,15 @@ module.exports = {
         },
         tertiary: {
           1: "#0C3139",
-          2: "#FFDFEE",
+          2: "#081023",
         },
         "black-variant": {
           1: "#000000",
           2: "#262626",
+        },
+        dark: {
+          1: "#30121B",
+          2: "#0E0B0C",
         },
       },
       keyframes: {
@@ -53,4 +57,3 @@ module.exports = {
   },
   plugins: [require("tailwindcss-animate")],
 };
-

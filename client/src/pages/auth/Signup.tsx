@@ -1,10 +1,6 @@
 import { SignUp } from "@clerk/clerk-react";
 
 const Signup = () => {
-	return (
-		<>
-			<SignUp />
-		</>
-	);
+  return <SignUp />;
 };
 export default Signup;

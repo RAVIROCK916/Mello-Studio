@@ -64,7 +64,9 @@ const Artist = () => {
         </figure>
         <div className="flex flex-col items-start justify-end gap-4 font-bold">
           <div className="space-y-2">
-            <h1 className="text-6xl text-black">{artist.name}</h1>
+            <h1 className="text-6xl text-black dark:text-neutral-50">
+              {artist.name}
+            </h1>
             <p className="font-semibold">
               {artist.followers.total.toLocaleString()} followers
             </p>

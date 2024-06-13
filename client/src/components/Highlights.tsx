@@ -43,7 +43,7 @@ const Highlights = () => {
         {albums.map((_: AlbumType, i: number) => (
           <span
             key={i + 1}
-            className="mt-3 h-[5px] w-[5px] cursor-pointer rounded-full bg-tertiary-1 transition duration-300 ease-in-out"
+            className="mt-3 h-[5px] w-[5px] cursor-pointer rounded-full bg-tertiary-1 transition duration-300 ease-in-out dark:bg-[#C2C2C2]"
             style={
               currentIndex === i
                 ? { opacity: 1, width: "40px" }

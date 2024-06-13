@@ -29,7 +29,9 @@ const Queue = () => {
         <div className="flex flex-col items-start justify-end gap-4 font-bold">
           <div className="space-y-2">
             <h1 className="text-4xl opacity-20">Queue</h1>
-            <h1 className="line-clamp-1 text-7xl text-black">{album?.name}</h1>
+            <h1 className="line-clamp-1 text-7xl text-black dark:text-neutral-50">
+              {album?.name}
+            </h1>
             <p className="text-2xl">
               {album?.artists.map((artist) => artist.name).join(", ")}
             </p>

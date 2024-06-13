@@ -16,11 +16,11 @@ const SearchBar = () => {
   return (
     <div className="flex flex-1 flex-row-reverse items-center justify-between gap-4">
       <label className="relative">
-        <MdSearch className="absolute left-[3%] top-[50%] -translate-y-1/2 transform cursor-pointer text-lg" />
+        <MdSearch className="absolute left-[3%] top-[50%] -translate-y-1/2 transform cursor-pointer text-lg dark:text-neutral-50" />
         <input
           type="text"
           placeholder="Search"
-          className="w-96 rounded-md bg-neutral-100 px-4 py-2 pl-10"
+          className="w-96 rounded-md bg-neutral-100 px-4 py-2 pl-10 dark:bg-neutral-900 dark:text-white"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           onFocus={handleNavigate}

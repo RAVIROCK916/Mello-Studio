@@ -55,7 +55,10 @@ const ArtistCard = ({ item }: Props) => {
           }}
         ></div>
       </Link>
-      <motion.h1 className="font-bold" variants={titleVariants}>
+      <motion.h1
+        className="font-bold dark:text-neutral-50"
+        variants={titleVariants}
+      >
         {name}
       </motion.h1>
     </motion.div>

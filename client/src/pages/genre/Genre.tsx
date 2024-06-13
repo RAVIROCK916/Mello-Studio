@@ -37,11 +37,13 @@ const Genre = () => {
   };
 
   return (
-    <div className="flex-1">
-      <div className="mb-4 flex h-48 flex-col items-start justify-between space-y-6 rounded-md bg-gradient-to-r from-indigo-200 px-6 py-4 uppercase">
-        <h1 className="text-8xl font-bold text-white">{genre}</h1>
+    <div className="flex-1 dark:text-neutral-100">
+      <div className="mb-4 flex h-48 flex-col items-start justify-between space-y-6 rounded-md bg-gradient-to-r from-indigo-200 px-6 py-4 uppercase dark:from-neutral-900 dark:text-neutral-900">
+        <h1 className="text-8xl font-bold text-white dark:text-neutral-100">
+          {genre}
+        </h1>
         <button
-          className="flex items-center justify-between gap-2 rounded-md bg-primary-2 px-6 py-2 text-white transition-colors hover:bg-primary-2/90"
+          className="flex items-center justify-between gap-2 rounded-md bg-primary-2 px-6 py-2 text-white transition-colors hover:bg-primary-2/90 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-100/90"
           onClick={addPlaylist}
         >
           <p>Play</p>

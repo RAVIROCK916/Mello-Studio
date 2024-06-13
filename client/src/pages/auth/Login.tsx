@@ -1,10 +1,6 @@
 import { SignIn } from "@clerk/clerk-react";
 
 const Login = () => {
-	return (
-		<>
-			<SignIn />
-		</>
-	);
+  return <SignIn />;
 };
 export default Login;

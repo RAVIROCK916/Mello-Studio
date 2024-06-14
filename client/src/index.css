@@ -19,9 +19,6 @@
 }
 
 @layer utilities {
-  .horizontal-scroll {
-    overflow: scroll;
-  }
   .horizontal-scroll::-webkit-scrollbar {
     display: none;
   }

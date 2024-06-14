@@ -3,6 +3,8 @@ import HighlightAlbumCard from "./HighlightAlbumCard";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { AlbumType } from "../types";
+import { Skeleton } from "./ui/skeleton";
+import HighlightsLoader from "./loaders/HighlightsLoader";
 
 const Highlights = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -23,7 +25,7 @@ const Highlights = () => {
   }, [currentIndex]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <HighlightsLoader />;
   }
 
   return (

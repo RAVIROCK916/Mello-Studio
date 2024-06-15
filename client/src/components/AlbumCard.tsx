@@ -15,7 +15,7 @@ const AlbumCard = ({ item }: Props) => {
   return (
     <div className="w-48">
       <div className="size-48 overflow-hidden rounded-md">
-        <img src={item.images[0].url} alt="" className="" />
+        <img src={item.images[0].url} alt="" className="cursor-pointer" />
       </div>
       <h3 className="truncate font-semibold">{item.name}</h3>
       <p className="text-sm font-medium text-neutral-500">

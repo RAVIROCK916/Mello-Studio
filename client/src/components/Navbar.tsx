@@ -26,7 +26,7 @@ const Navbar = () => {
             return (
               <li
                 className={
-                  "flex cursor-pointer items-center gap-2 border-l-4 border-transparent px-12 py-4 text-black-variant-2 hover:text-black-variant-2/90 " +
+                  "flex cursor-pointer items-center gap-2 border-l-4 border-transparent px-12 py-4 text-black-variant-2 transition-colors hover:text-neutral-700 " +
                   (activeNavItem === navItem.value
                     ? "!border-secondary-1 bg-gradient-to-r from-secondary-1/5 to-secondary-2/10 text-secondary-1 hover:!text-secondary-1/90 dark:from-secondary-1/10 dark:to-black"
                     : "")

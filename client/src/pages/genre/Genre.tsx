@@ -1,3 +1,4 @@
+import TableLoader from "@/components/loaders/TableLoader";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import useAlbumsStore from "@/store/albumsStore";
 import { AlbumType } from "@/types";
@@ -52,35 +53,39 @@ const Genre = () => {
       </div>
       <Table>
         <TableBody className="font-semibold">
-          {albums?.map((album: Album, idx: number) => (
-            <TableRow
-              key={album.id}
-              className="cursor-pointer"
-              onClick={() => {
-                addToQueue(albums.slice(idx));
-                navigate("/dashboard/queue");
-              }}
-            >
-              <TableCell>{idx + 1}</TableCell>
-              <TableCell>
-                <div className="w-max overflow-hidden rounded-sm">
-                  <img src={album.album.images[0].url} width={40} alt="" />
-                </div>
-              </TableCell>
-              <TableCell>{album.name}</TableCell>
-              <TableCell className="opacity-50">
-                {album.artists[0].name}
-              </TableCell>
-              <TableCell className="opacity-50">
-                {album.album.release_date}
-              </TableCell>
-              <TableCell className="opacity-50">
-                <IoTimeOutline className="mr-1 inline align-text-bottom" />
-                {getDuration(album.duration_ms)}
-              </TableCell>
-              <TableCell className="my-auto">...</TableCell>
-            </TableRow>
-          ))}
+          {albums ? (
+            albums.map((album: Album, idx: number) => (
+              <TableRow
+                key={album.id}
+                className="cursor-pointer"
+                onClick={() => {
+                  addToQueue(albums.slice(idx));
+                  navigate("/dashboard/queue");
+                }}
+              >
+                <TableCell>{idx + 1}</TableCell>
+                <TableCell>
+                  <div className="w-max overflow-hidden rounded-sm">
+                    <img src={album.album.images[0].url} width={40} alt="" />
+                  </div>
+                </TableCell>
+                <TableCell>{album.name}</TableCell>
+                <TableCell className="opacity-50">
+                  {album.artists[0].name}
+                </TableCell>
+                <TableCell className="opacity-50">
+                  {album.album.release_date}
+                </TableCell>
+                <TableCell className="opacity-50">
+                  <IoTimeOutline className="mr-1 inline align-text-bottom" />
+                  {getDuration(album.duration_ms)}
+                </TableCell>
+                <TableCell className="my-auto">...</TableCell>
+              </TableRow>
+            ))
+          ) : (
+            <TableLoader />
+          )}
         </TableBody>
       </Table>
     </div>

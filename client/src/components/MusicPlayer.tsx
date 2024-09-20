@@ -18,7 +18,6 @@ const MusicPlayer = () => {
 
   const { currentAlbum, playNext, playPrev } = useAlbumsStore((state) => ({
     currentAlbum: state.current,
-    queue: state.queue,
     playNext: state.playNext,
     playPrev: state.playPrev,
   }));
@@ -103,7 +102,7 @@ const MusicPlayer = () => {
 
   return (
     currentAlbum && (
-      <div className="dark:from-dark-1 dark:to-dark-2 fixed bottom-0 left-0 flex w-screen items-center justify-between border-t border-t-secondary-1 bg-opacity-80 bg-gradient-to-r from-secondary-2 to-neutral-50 px-8 py-5 *:flex-1">
+      <div className="fixed bottom-0 left-0 flex w-screen items-center justify-between border-t border-t-secondary-1 bg-opacity-80 bg-gradient-to-r from-secondary-2 to-neutral-50 px-8 py-5 *:flex-1 dark:from-dark-1 dark:to-dark-2">
         <audio
           ref={audioRef}
           src={currentAlbum.preview_url}
@@ -128,8 +127,10 @@ const MusicPlayer = () => {
             />
           </div>
           <div>
-            <p className="text-lg font-bold">{currentAlbum?.name}</p>
-            <p className="text-xs font-semibold text-neutral-500">
+            <p className="line-clamp-1 text-lg font-bold">
+              {currentAlbum?.name}
+            </p>
+            <p className="line-clamp-1 text-xs font-semibold text-neutral-500">
               {currentAlbum?.artists.map((artist) => artist.name).join(", ")}
             </p>
           </div>
@@ -153,7 +154,7 @@ const MusicPlayer = () => {
               onClick={handleRewind}
             />
             <button
-              className="relative flex size-7 cursor-pointer items-center justify-center rounded-full bg-black dark:bg-primary-1"
+              className="relative flex size-7 cursor-pointer items-center justify-center rounded-full bg-black dark:bg-primary-2"
               onClick={handlePlayPause}
             >
               {isPlaying && currentAlbum ? (

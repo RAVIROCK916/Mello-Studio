@@ -4,17 +4,13 @@ import { getDuration } from "@/utils/getDuration";
 import { IoTimeOutline } from "react-icons/io5";
 
 const Queue = () => {
-  const { current, setCurrent, queue, addToQueue } = useAlbumsStore(
-    (state) => ({
-      current: state.current,
-      setCurrent: state.setCurrent,
-      queue: state.queue,
-      addToQueue: state.addToQueue,
-    }),
-  );
+  const { current, queue, addToQueue } = useAlbumsStore((state) => ({
+    current: state.current,
+    queue: state.queue,
+    addToQueue: state.addToQueue,
+  }));
 
   let album = current?.album;
-  console.log(album);
 
   return (
     <div className="flex-1">
@@ -41,7 +37,10 @@ const Queue = () => {
       <Table>
         <TableBody className="font-semibold">
           {queue.songs.map((album, idx) => (
-            <TableRow key={album.id}>
+            <TableRow
+              key={album.id}
+              onClick={() => addToQueue(queue.songs.slice(idx))}
+            >
               <TableCell>{idx + 1}</TableCell>
               <TableCell>
                 <div className="w-max overflow-hidden rounded-md">
